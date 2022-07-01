@@ -110,5 +110,5 @@ private welcomePeople(x: string[] | string) {
   }
 }
 
-// Some comment for test
+// Some comment
 }
