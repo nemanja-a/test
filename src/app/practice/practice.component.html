@@ -1,0 +1,136 @@
+
+
+<!-- ngClass and ngStyles  -->
+<div>
+    <div class="text-lg text-red-500 p-10 border-solid border-orange-400">Angular practice</div>
+
+    <nav> 
+        <a routerLink="/service-workers">Service Workers and PWA</a>
+    </nav>
+    <div [ngClass]="currentClasses">This div is initially saveable, unchanged and special.</div>
+    <span class="hover:cursor-pointer hover:border-4 border-red-400" (click)="setCurrentStyles()" [ngStyle]="currentStyles">    
+        <span>This span is initially italic, normal weight, and extra large (24px).</span>    
+    </span>
+</div>
+
+
+
+<!-- ngClass and ngStyles  -->
+
+<!-- Displaying and updating properties with ngModel -->
+<div>
+    <label class="m-2" for="example-ngModel">[(ngModel)]: {{currentItem.name | uppercase}}</label>
+    <input class="w-full" [(ngModel)]="currentItem.name" id="example-ngModel">
+</div>
+<!-- Displaying and updating properties with ngModel -->
+
+<!-- Tracking items with *ngFor trackBy -->
+
+<div class="m-2 p-2 border-4 w-1/6 hover:bg-gray-700 hover:cursor-pointer" *ngFor="let item of items; trackBy: trackByItems">
+    <span>Item ID: ({{item.id}})</span>
+    <span>Item name: {{item.value}}</span>
+</div>
+<br>
+<!-- Tracking items with *ngFor trackBy -->
+
+<!-- Hosting a directive without a DOM element -->
+
+<p>
+    I turned the corner
+    <ng-container *ngIf="hero">
+        and saw {{hero.name}}. I waved
+    </ng-container>
+    and continued on my way
+</p>
+<br>
+
+<ng-container *ngIf="hero; else templateA"></ng-container>
+<ng-template #templateA>
+    <div>I will show when hero goes away!</div>
+</ng-template>
+
+<!-- ng-container se koristi kada u ngFor-u renderujemo item po nekom uslovu. Primer: -->
+<ul>
+    <ng-container *ngFor="let item of items">
+        <li *ngIf="item.isValid">
+            {{ item.name }}
+        </li>
+    </ng-container>
+</ul>
+<br>
+
+<!-- Hosting a directive without a DOM element -->
+
+<!-- Use alongside ngTemplateOutlet -->
+
+<ng-container *ngTemplateOutlet="tmpl; context: {$implicit: 'Hello'}"></ng-container>
+<ng-container *ngTemplateOutlet="tmpl; context: {$implicit: 'World'}"></ng-container>
+
+<ng-template #tmpl let-text>
+    <h1>{{ text }}</h1>
+</ng-template>
+<br>
+
+<!-- Use alongside ngTemplateOutlet -->
+
+<!-- Switching cases with NgSwitch -->
+
+<div [ngSwitch]="currentItem.feature">
+    <div *ngSwitchCase="'stout'">Stout feature item</div>
+    <div *ngSwitchCase="'slim'">Slim feature item</div>
+    <div *ngSwitchCase="'vintage'">Vintage feature item</div>
+    <div [appHighlight]="color" *ngSwitchCase="'bright'">Bright feature item</div>
+    <div *ngSwitchDefault>Unknown feature item</div>
+</div>
+
+<!-- Switching cases with NgSwitch -->
+
+<!-- Attribute Directives -->
+
+<h1>My First Attribute Directive</h1>
+<h2>Pick a highlight color</h2>
+<div>
+    <input type="radio" name="colors" (click)="color='lightgreen'">Green
+    <input type="radio" name="colors" (click)="color='yellow'">Yellow
+    <input type="radio" name="colors" (click)="color='cyan'">Cyan
+</div>
+<div [appHighlight]="color" defaultColor="violet">Highlight me!</div>
+
+<!-- Attribute Directives -->
+
+<!-- Deactivating Angular processing with NgNonBindable -->
+
+<p>Use ngNonBindable to  stop evaluation</p>
+<p ngNonBindable [appHighlight]="'yellow'">This should not evaluate: {{ 1 + 1 }}, but will highlight yellow</p>
+<p>This should evaluate: {{ 1 + 1 }}</p>
+
+<!-- Deactivating Angular processing with NgNonBindable -->
+
+<!-- Structural directives -->
+
+<div *ngIf="hero" class="name">{{hero.name}}</div>
+
+<div
+    *ngFor="let hero of heroes; let i=index; let odd=odd; trackby: trackById"
+     [class.odd]="odd"
+>
+    ({{i}}) {{hero.name}}
+</div>
+
+<ng-template ngFor let-hero [ngForOf]="heroes"
+let-i="index" let-odd="odd"
+>
+<div [class.odd]="odd">
+    ({{i}}) {{hero.name}}
+</div>
+</ng-template>
+
+<p *appUnless="unlessCondition" class="unless a">(A) This paragraph is displayed because the condition is false.</p>
+
+<p *appUnless="!unlessCondition" class="unless b">(B) Although the condition is true,
+    this paragraph is displayed because appUnless is set to false
+</p>
+
+<!-- Structural directives -->
+
+
